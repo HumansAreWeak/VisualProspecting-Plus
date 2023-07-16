@@ -18,8 +18,8 @@ task getVoxelMap(type: Download) {
     }
     src "https://media.forgecdn.net/files/2462/146/mod_voxelMap_1.7.0b_for_1.7.10.litemod" //direct link to VoxelMap on CurseForge
     dest voxelMapFile
-    mustRunAfter "deobfBinJar"
-    mustRunAfter "repackMinecraft"
+    //mustRunAfter "rfgDeobfuscatorTransformed"
+    //mustRunAfter "taskPackagePatchedMc"
 }
 
 task deobfVoxelMap(dependsOn: getVoxelMap, type: Exec) {
@@ -32,6 +32,5 @@ task deobfVoxelMap(dependsOn: getVoxelMap, type: Exec) {
 }
 
 tasks.setupCIWorkspace.dependsOn deobfVoxelMap
-tasks.setupDevWorkspace.dependsOn deobfVoxelMap
 tasks.setupDecompWorkspace.dependsOn deobfVoxelMap
 tasks.compileJava.dependsOn deobfVoxelMap

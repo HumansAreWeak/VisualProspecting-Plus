@@ -1,16 +1,10 @@
 repositories {
     maven {
-        name = "ic2"
-        url = "https://maven.ic2.player.to/"
-        metadataSources {
-            mavenPom()
-            artifact()
-        }
+        name = "gt"
+        url = "http://gregtech.overminddl1.com/"
+        allowInsecureProtocol = true
     }
     maven {
         url "https://cursemaven.com"
-    }
-    maven {
-        url = "https://jitpack.io"
     }
 }
