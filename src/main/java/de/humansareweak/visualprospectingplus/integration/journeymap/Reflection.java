@@ -1,6 +1,6 @@
 package de.humansareweak.visualprospectingplus.integration.journeymap;
 
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import journeymap.client.render.map.GridRenderer;
 import journeymap.client.ui.fullscreen.Fullscreen;
 
@@ -16,7 +16,7 @@ public class Reflection {
             gridRenderer.setAccessible(true);
         }
         catch (Exception e) {
-            VP.error("Failed to access private fields in JourneyMap!");
+            VPP.error("Failed to access private fields in JourneyMap!");
             e.printStackTrace();
         }
     }

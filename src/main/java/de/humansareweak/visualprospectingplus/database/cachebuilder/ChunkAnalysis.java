@@ -1,6 +1,6 @@
 package de.humansareweak.visualprospectingplus.database.cachebuilder;
 
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.database.veintypes.VeinType;
 import de.humansareweak.visualprospectingplus.database.veintypes.VeinTypeCaching;
 import io.xol.enklume.nbt.*;
@@ -13,7 +13,7 @@ public class ChunkAnalysis {
 
     private final Set<Short> ores = new HashSet<>();
     private final Set<VeinType> matchedVeins = new HashSet<>();
-    private int minVeinBlockY = VP.minecraftWorldHeight;
+    private int minVeinBlockY = VPP.minecraftWorldHeight;
 
     public void processMinecraftChunk(final NBTCompound chunkRoot) {
         for (final NBTNamed tileEntity : ((NBTList) chunkRoot.getTag("Level.TileEntities")).elements) {

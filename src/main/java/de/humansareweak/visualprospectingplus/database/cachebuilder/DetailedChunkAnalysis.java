@@ -1,6 +1,6 @@
 package de.humansareweak.visualprospectingplus.database.cachebuilder;
 
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.Utils;
 import de.humansareweak.visualprospectingplus.database.OreVeinPosition;
 import de.humansareweak.visualprospectingplus.database.ServerCache;
@@ -18,7 +18,7 @@ public class DetailedChunkAnalysis {
     public final int chunkX;
     public final int chunkZ;
     // For each height we count how often a ore (short) has occured
-    private final Map<Short, Integer>[] oresPerY = new HashMap[VP.minecraftWorldHeight];
+    private final Map<Short, Integer>[] oresPerY = new HashMap[VPP.minecraftWorldHeight];
 
     public DetailedChunkAnalysis(int dimensionId, int chunkX, int chunkZ) {
         this.dimensionId = dimensionId;

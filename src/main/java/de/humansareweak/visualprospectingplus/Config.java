@@ -37,7 +37,7 @@ public class Config {
     public static int minZoomLevelForOreLabel = Defaults.minZoomLevelForOreLabel;
     public static int minZoomLevelForUndergroundFluidDetails = Defaults.minZoomLevelForUndergroundFluidDetails;
     public static int uploadBandwidthBytes = Defaults.uploadBandwidthBytes;
-    public static int uploadPacketsPerSecond = uploadBandwidthBytes / VP.uploadSizePerPacketInBytes;
+    public static int uploadPacketsPerSecond = uploadBandwidthBytes / VPP.uploadSizePerPacketInBytes;
     public static int maxTransferCacheSizeMB = Defaults.maxTransferCacheSizeMB;
     public static boolean enableVoxelMapWaypointsByDefault = Defaults.enableVoxelMapWaypointsByDefault;
     public static int maxDimensionSizeMBForFastScanning = Defaults.maxDimensionSizeMBForFastScanning;
@@ -75,7 +75,7 @@ public class Config {
                 "[CLIENT + SERVER] Limit the bandwidth (in B/s) a client is allowed to transmit when uploading its prospection data." +
                         " If exceeded, the client will be kicked!");
         uploadBandwidthBytes = uploadBandwidthProperty.getInt();
-        uploadPacketsPerSecond = uploadBandwidthBytes / VP.uploadSizePerPacketInBytes;
+        uploadPacketsPerSecond = uploadBandwidthBytes / VPP.uploadSizePerPacketInBytes;
 
         Property maxTransferCacheSizeMBProperty = configuration.get(Categories.general, "maxTransferCacheSizeMB",
                 Defaults.maxTransferCacheSizeMB, "[Server] Limit the RAM size in MB of what can players use to" +

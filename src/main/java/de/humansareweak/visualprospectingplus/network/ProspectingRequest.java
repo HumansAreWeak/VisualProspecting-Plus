@@ -2,7 +2,7 @@ package de.humansareweak.visualprospectingplus.network;
 
 import de.humansareweak.visualprospectingplus.Config;
 import de.humansareweak.visualprospectingplus.Utils;
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.database.OreVeinPosition;
 import de.humansareweak.visualprospectingplus.database.ServerCache;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -88,13 +88,13 @@ public class ProspectingRequest implements IMessage {
                 final Block block = world.getBlock(message.blockX, message.blockY, message.blockZ);
 
                 // TODO: Fix the API
-                VP.info("BLOCK is instanceof PrefixBlock: " + (block instanceof PrefixBlock));
+                VPP.info("BLOCK is instanceof PrefixBlock: " + (block instanceof PrefixBlock));
 
                 if(block instanceof PrefixBlock) {
                     final TileEntity tileEntity = world.getTileEntity(message.blockX, message.blockY, message.blockZ);
 
                     // TODO: Fix the API
-                    VP.info("TILE_ENTITY is instanceof PrefixBlockTileEntity: " + (tileEntity instanceof PrefixBlockTileEntity));
+                    VPP.info("TILE_ENTITY is instanceof PrefixBlockTileEntity: " + (tileEntity instanceof PrefixBlockTileEntity));
 
                     if (tileEntity instanceof PrefixBlockTileEntity) {
                         final short metaData = ((PrefixBlockTileEntity) tileEntity).mMetaData;

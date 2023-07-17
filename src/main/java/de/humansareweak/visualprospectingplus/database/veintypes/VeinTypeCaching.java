@@ -9,6 +9,9 @@ import de.humansareweak.visualprospectingplus.Utils;
 import gregapi.data.CS;
 import gregapi.data.MT;
 import gregapi.oredict.OreDictMaterial;
+import gregapi.worldgen.StoneLayer;
+import gregapi.worldgen.StoneLayerOres;
+import gregapi.worldgen.WorldgenObject;
 import net.minecraft.client.resources.I18n;
 
 import java.io.File;
@@ -24,8 +27,11 @@ public class VeinTypeCaching implements Runnable {
     private static Map<String, VeinType> veinTypeLookupTableForNames = new HashMap<>();
     private static Map<String, Short> veinTypeStorageInfo;
     public static List<VeinType> veinTypes;
-    public static Set<Short> largeVeinOres;
+    public static Set<StoneLayerOres> largeVeinOres;
     private static int longesOreName = 0;
+    private static final Set<WorldgenObject> worldGenObjects = new HashSet<>();
+
+    static { for(var allGenObjs : CS.GEN_ALL) { worldGenObjects.addAll(allGenObjs); } }
 
     // BartWorks initializes veins in FML preInit
     // GalacticGreg initializes veins in FML postInit, but only copies all base game veins to make them available on all planets
@@ -35,29 +41,12 @@ public class VeinTypeCaching implements Runnable {
         veinTypes = new ArrayList<>();
         largeVeinOres = new HashSet<>();
         veinTypes.add(VeinType.NO_VEIN);
-        /*
+        veinTypes.addAll(StoneLayer.LAYERS.stream()
+            .map(e -> new VeinType("layer." + e.mStone.getUnlocalizedName(), e ))
+            .toList()
+        );
 
-        for(GT_Worldgen_GT_Ore_Layer vein : GT_Worldgen_GT_Ore_Layer.sList) {
-            if(vein.mWorldGenName.equals(Tags.ORE_MIX_NONE_NAME)) {
-                break;
-            }
-            final OreDictMaterial material = getGregTechMaterial(vein.mPrimaryMeta);
-
-            veinTypes.add(new VeinType(
-                    vein.mWorldGenName,
-                    new GregTechOreMaterialProvider(material),
-                    vein.mSize,
-                    vein.mPrimaryMeta,
-                    vein.mSecondaryMeta,
-                    vein.mBetweenMeta,
-                    vein.mSporadicMeta,
-                    Math.max(0, vein.mMinY - 6),  // GregTech ore veins start at layer -1 and the blockY RNG adds another -5 offset
-                    Math.min(255, vein.mMaxY - 6)));
-        }
-
-        // Assign veinTypeIds for efficient storage
         loadVeinTypeStorageInfo();
-
         final Optional<Short> maxVeinTypeIdOptional = veinTypeStorageInfo.values().stream().max(Short::compare);
         short maxVeinTypeId = maxVeinTypeIdOptional.isPresent() ? maxVeinTypeIdOptional.get() : 0;
 
@@ -78,10 +67,7 @@ public class VeinTypeCaching implements Runnable {
 
             // Build large vein LUT
             if(veinType.canOverlapIntoNeighborOreChunk()) {
-                largeVeinOres.add(veinType.primaryOreMeta);
-                largeVeinOres.add(veinType.secondaryOreMeta);
-                largeVeinOres.add(veinType.inBetweenOreMeta);
-                largeVeinOres.add(veinType.sporadicOreMeta);
+                largeVeinOres.addAll(veinType.getOres());
             }
         }
         saveVeinTypeStorageInfo();
@@ -91,8 +77,6 @@ public class VeinTypeCaching implements Runnable {
                 longesOreName = veinType.name.length();
             }
         }
-
-         */
     }
 
     private OreDictMaterial getGregTechMaterial(short metaId) {

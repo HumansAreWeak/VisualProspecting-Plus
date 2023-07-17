@@ -1,11 +1,9 @@
 package de.humansareweak.visualprospectingplus.integration.gregtech;
 
 import de.humansareweak.visualprospectingplus.Config;
-import de.humansareweak.visualprospectingplus.Tags;
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import gregapi.oredict.OreDictMaterial;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -56,7 +54,7 @@ public class Dwarf implements Runnable {
      *  Reads the list of materials and byproducts to build a data table
      */
     public static void readTheStones() {
-        VP.info("Reading all the material dictionaries.");
+        VPP.info("Reading all the material dictionaries.");
         for (OreDictMaterial odm : OreDictMaterial.MATERIAL_MAP.values()) {
             if(odm.contains(gregapi.data.TD.ItemGenerator.ORES) && odm.mID > 0) {
                 GeoChemistry gc = new GeoChemistry(odm.mID);
@@ -136,7 +134,7 @@ public class Dwarf implements Runnable {
                 knowledge.add(gc);
             }
         }
-        VP.info("Compiled bydproduct data for " + knowledge.size() + " ore types.");
+        VPP.info("Compiled bydproduct data for " + knowledge.size() + " ore types.");
         for(GeoChemistry gc : knowledge) {
             for(short byID : gc.mBy.keySet()) {
                 GeoChemistry byPr = read(byID);
@@ -146,7 +144,7 @@ public class Dwarf implements Runnable {
                 }
             }
         }
-        VP.info("Crossreferenced the byproduct data.");
+        VPP.info("Crossreferenced the byproduct data.");
 
         // TODO: Let Visual Prospecting handling this part
         /*

@@ -1,7 +1,7 @@
 package de.humansareweak.visualprospectingplus.integration.model.layers;
 
 import de.humansareweak.visualprospectingplus.Utils;
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.database.ClientCache;
 import de.humansareweak.visualprospectingplus.database.UndergroundFluidPosition;
 import de.humansareweak.visualprospectingplus.integration.model.buttons.UndergroundFluidButtonManager;
@@ -51,8 +51,8 @@ public class UndergroundFluidLayerManager extends LayerManager {
 
         ArrayList<UndergroundFluidLocation> undergroundFluidLocations = new ArrayList<>();
 
-        for (int chunkX = minUndergroundFluidX; chunkX <= maxUndergroundFluidX; chunkX += VP.undergroundFluidSizeChunkX) {
-            for (int chunkZ = minUndergroundFluidZ; chunkZ <= maxUndergroundFluidZ; chunkZ += VP.undergroundFluidSizeChunkZ) {
+        for (int chunkX = minUndergroundFluidX; chunkX <= maxUndergroundFluidX; chunkX += VPP.undergroundFluidSizeChunkX) {
+            for (int chunkZ = minUndergroundFluidZ; chunkZ <= maxUndergroundFluidZ; chunkZ += VPP.undergroundFluidSizeChunkZ) {
                 final UndergroundFluidPosition undergroundFluid = ClientCache.instance.getUndergroundFluid(playerDimensionId, chunkX, chunkZ);
                 if (undergroundFluid.isProspected()) {
                     undergroundFluidLocations.add(new UndergroundFluidLocation(undergroundFluid));

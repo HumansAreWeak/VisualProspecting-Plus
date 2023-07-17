@@ -1,6 +1,6 @@
 package de.humansareweak.visualprospectingplus.integration.model.locations;
 
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.database.ClientCache;
 import de.humansareweak.visualprospectingplus.database.OreVeinPosition;
 import de.humansareweak.visualprospectingplus.integration.model.waypoints.Waypoint;
@@ -16,7 +16,7 @@ public class OreVeinLocation implements IWaypointAndLocationProvider {
 
     private static final String depletedHint = EnumChatFormatting.RED + I18n.format("visualprospecting.depleted");
     private static final String activeWaypointHint = EnumChatFormatting.GOLD + I18n.format("visualprospecting.iswaypoint");
-    private static final String toggleDepletedHint = EnumChatFormatting.DARK_GRAY + I18n.format("visualprospecting.node.deletehint", Keyboard.getKeyName(VP.keyAction.getKeyCode()));
+    private static final String toggleDepletedHint = EnumChatFormatting.DARK_GRAY + I18n.format("visualprospecting.node.deletehint", Keyboard.getKeyName(VPP.keyAction.getKeyCode()));
 
     private final OreVeinPosition oreVeinPosition;
     private final String name;

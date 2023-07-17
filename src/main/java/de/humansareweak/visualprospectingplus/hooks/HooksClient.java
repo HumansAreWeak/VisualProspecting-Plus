@@ -1,7 +1,7 @@
 package de.humansareweak.visualprospectingplus.hooks;
 
 import de.humansareweak.visualprospectingplus.Utils;
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.database.ResetClientCacheCommand;
 import de.humansareweak.visualprospectingplus.integration.voxelmap.VoxelMapEventHandler;
 
@@ -27,8 +27,8 @@ public class HooksClient extends HooksShared {
 	public void fmlLifeCycleEvent(FMLPreInitializationEvent event) {
 		super.fmlLifeCycleEvent(event);
 
-		VP.keyAction = new KeyBinding("visualprospecting.key.action.name", Keyboard.KEY_DELETE, "visualprospecting.key.action.category");
-		ClientRegistry.registerKeyBinding(VP.keyAction);
+		VPP.keyAction = new KeyBinding("visualprospecting.key.action.name", Keyboard.KEY_DELETE, "visualprospecting.key.action.category");
+		ClientRegistry.registerKeyBinding(VPP.keyAction);
 	}
 
 	@Override

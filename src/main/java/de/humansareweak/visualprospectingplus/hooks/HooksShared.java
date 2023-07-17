@@ -1,12 +1,11 @@
 package de.humansareweak.visualprospectingplus.hooks;
 
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.Config;
 import de.humansareweak.visualprospectingplus.Tags;
 import de.humansareweak.visualprospectingplus.database.ServerCache;
 import de.humansareweak.visualprospectingplus.database.WorldIdHandler;
 import de.humansareweak.visualprospectingplus.database.cachebuilder.WorldAnalysis;
-import de.humansareweak.visualprospectingplus.database.veintypes.VeinTypeCaching;
 import de.humansareweak.visualprospectingplus.item.ProspectorsLog;
 import de.humansareweak.visualprospectingplus.network.ProspectingNotification;
 import de.humansareweak.visualprospectingplus.network.ProspectingRequest;
@@ -25,9 +24,6 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import gregapi.api.Abstract_Proxy;
-import gregapi.data.CS;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -42,13 +38,13 @@ public class HooksShared extends Abstract_Proxy {
 	public void fmlLifeCycleEvent(FMLPreInitializationEvent event) 	{
 		Config.syncronizeConfiguration(event.getSuggestedConfigurationFile());
 
-		VP.network = NetworkRegistry.INSTANCE.newSimpleChannel(Tags.MODID);
+		VPP.network = NetworkRegistry.INSTANCE.newSimpleChannel(Tags.MODID);
 		int networkId = 0;
-		VP.network.registerMessage(ProspectingRequest.Handler.class, ProspectingRequest.class, networkId++, Side.SERVER);
-		VP.network.registerMessage(ProspectingNotification.Handler.class, ProspectingNotification.class, networkId++, Side.CLIENT);
-		VP.network.registerMessage(WorldIdNotification.Handler.class, WorldIdNotification.class, networkId++, Side.CLIENT);
-		VP.network.registerMessage(ProspectionSharing.ServerHandler.class, ProspectionSharing.class, networkId++, Side.SERVER);
-		VP.network.registerMessage(ProspectionSharing.ClientHandler.class, ProspectionSharing.class, networkId++, Side.CLIENT);
+		VPP.network.registerMessage(ProspectingRequest.Handler.class, ProspectingRequest.class, networkId++, Side.SERVER);
+		VPP.network.registerMessage(ProspectingNotification.Handler.class, ProspectingNotification.class, networkId++, Side.CLIENT);
+		VPP.network.registerMessage(WorldIdNotification.Handler.class, WorldIdNotification.class, networkId++, Side.CLIENT);
+		VPP.network.registerMessage(ProspectionSharing.ServerHandler.class, ProspectionSharing.class, networkId++, Side.SERVER);
+		VPP.network.registerMessage(ProspectionSharing.ClientHandler.class, ProspectionSharing.class, networkId++, Side.CLIENT);
 
 		ProspectorsLog.instance = new ProspectorsLog();
 		GameRegistry.registerItem(ProspectorsLog.instance, ProspectorsLog.instance.getUnlocalizedName());
@@ -93,7 +89,7 @@ public class HooksShared extends Abstract_Proxy {
 				world.cacheVeins();
 			}
 			catch (IOException | DataFormatException e) {
-				VP.info("Could not load world save files to build vein cache!");
+				VPP.info("Could not load world save files to build vein cache!");
 				e.printStackTrace();
 			}
 		}

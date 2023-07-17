@@ -152,7 +152,7 @@ public class VisualProspecting_API {
                 ClientCache.instance.putUndergroundFluids(undergroundFluids);
             }
             else {
-                VP.network.sendTo(new ProspectingNotification(oreVeins, undergroundFluids), player);
+                VPP.network.sendTo(new ProspectingNotification(oreVeins, undergroundFluids), player);
             }
         }
 

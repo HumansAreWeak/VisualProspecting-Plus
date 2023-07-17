@@ -1,6 +1,6 @@
 package de.humansareweak.visualprospectingplus.network;
 
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.database.ClientCache;
 import de.humansareweak.visualprospectingplus.database.UndergroundFluidPosition;
 import de.humansareweak.visualprospectingplus.database.OreVeinPosition;
@@ -57,9 +57,9 @@ public class ProspectingNotification implements IMessage {
             final int chunkX = buf.readInt();
             final int chunkZ = buf.readInt();
             final Fluid fluid = FluidRegistry.getFluid(buf.readInt());
-            final int[][] chunks = new int[VP.undergroundFluidSizeChunkX][VP.undergroundFluidSizeChunkZ];
-            for(int offsetChunkX = 0; offsetChunkX < VP.undergroundFluidSizeChunkX; offsetChunkX++)
-                for(int offsetChunkZ = 0; offsetChunkZ < VP.undergroundFluidSizeChunkZ; offsetChunkZ++) {
+            final int[][] chunks = new int[VPP.undergroundFluidSizeChunkX][VPP.undergroundFluidSizeChunkZ];
+            for(int offsetChunkX = 0; offsetChunkX < VPP.undergroundFluidSizeChunkX; offsetChunkX++)
+                for(int offsetChunkZ = 0; offsetChunkZ < VPP.undergroundFluidSizeChunkZ; offsetChunkZ++) {
                     chunks[offsetChunkX][offsetChunkZ] = buf.readInt();
                 }
             undergroundFluids.add(new UndergroundFluidPosition(dimensionId, chunkX, chunkZ, fluid, chunks));
@@ -82,8 +82,8 @@ public class ProspectingNotification implements IMessage {
             buf.writeInt(undergroundFluid.chunkX);
             buf.writeInt(undergroundFluid.chunkZ);
             buf.writeInt(undergroundFluid.fluid.getID());
-            for(int offsetChunkX = 0; offsetChunkX < VP.undergroundFluidSizeChunkX; offsetChunkX++) {
-                for (int offsetChunkZ = 0; offsetChunkZ < VP.undergroundFluidSizeChunkZ; offsetChunkZ++) {
+            for(int offsetChunkX = 0; offsetChunkX < VPP.undergroundFluidSizeChunkX; offsetChunkX++) {
+                for (int offsetChunkZ = 0; offsetChunkZ < VPP.undergroundFluidSizeChunkZ; offsetChunkZ++) {
                     buf.writeInt(undergroundFluid.chunks[offsetChunkX][offsetChunkZ]);
                 }
             }

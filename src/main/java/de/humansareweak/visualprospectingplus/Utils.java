@@ -97,7 +97,7 @@ public class Utils {
     }
 
     public static boolean isLogicalClient() {
-        return VPMod.PROXY instanceof HooksClient;
+        return VPPMod.PROXY instanceof HooksClient;
     }
 
     public static File getMinecraftDirectory() {
@@ -243,7 +243,7 @@ public class Utils {
             net.minecraft.util.ChatComponentText chaty = new net.minecraft.util.ChatComponentText(rock2.toString());
             aPlayer.addChatMessage(chaty);
         } else {
-            VP.info("Send message to player " + aPlayer.getDisplayName() + ": " + rock2);
+            VPP.info("Send message to player " + aPlayer.getDisplayName() + ": " + rock2);
         }
     }
 
@@ -254,7 +254,7 @@ public class Utils {
         IE_VOID_FILE = "IE_Excavations.json";
 
     public static void writeJson(String name) {
-        VP.info("Trying to write JSON with (name="+name+")");
+        VPP.info("Trying to write JSON with (name="+name+")");
     }
 
     public static enum ChatString {

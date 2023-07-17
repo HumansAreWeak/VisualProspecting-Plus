@@ -1,6 +1,6 @@
 package de.humansareweak.visualprospectingplus.mixins.journeymap;
 
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.integration.journeymap.JourneyMapState;
 import de.humansareweak.visualprospectingplus.integration.journeymap.buttons.LayerButton;
 import de.humansareweak.visualprospectingplus.integration.journeymap.render.LayerRenderer;
@@ -242,7 +242,7 @@ public abstract class FullscreenMixin extends JmUI {
             require = 1,
             cancellable = true)
     private void onKeyPress(CallbackInfo callbackInfo) {
-        if((chat == null || chat.isHidden()) && Constants.isPressed(VP.keyAction)) {
+        if((chat == null || chat.isHidden()) && Constants.isPressed(VPP.keyAction)) {
             for(LayerRenderer layer : JourneyMapState.instance.renderers) {
                 if (layer instanceof WaypointProviderLayerRenderer) {
                     ((WaypointProviderLayerRenderer) layer).onActionKeyPressed();

@@ -1,29 +1,5 @@
 package de.humansareweak.visualprospectingplus.mixins.xaerosminimap;
 
-import de.humansareweak.visualprospectingplus.VP;
-import de.humansareweak.visualprospectingplus.integration.model.MapState;
-import de.humansareweak.visualprospectingplus.integration.model.layers.LayerManager;
-import de.humansareweak.visualprospectingplus.integration.xaeroworldmap.XaeroWorldMapState;
-import de.humansareweak.visualprospectingplus.integration.xaeroworldmap.renderers.LayerRenderer;
-import de.humansareweak.visualprospectingplus.integration.xaeroworldmap.rendersteps.RenderStep;
-import net.minecraft.client.Minecraft;
-import net.minecraftforge.client.MinecraftForgeClient;
-import org.lwjgl.opengl.GL11;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Slice;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-import xaero.common.XaeroMinimapSession;
-import xaero.common.minimap.MinimapProcessor;
-import xaero.common.minimap.render.MinimapRenderer;
-import xaero.common.settings.ModSettings;
-
-import java.util.ArrayList;
-
 /*
 @SuppressWarnings("UnusedMixin")
 @Mixin(value = MinimapRenderer.class, remap = false)

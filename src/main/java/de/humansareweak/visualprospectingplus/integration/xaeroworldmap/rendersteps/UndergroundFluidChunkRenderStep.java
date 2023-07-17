@@ -2,7 +2,7 @@ package de.humansareweak.visualprospectingplus.integration.xaeroworldmap.renders
 
 import de.humansareweak.visualprospectingplus.Config;
 import de.humansareweak.visualprospectingplus.Utils;
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.integration.DrawUtils;
 import de.humansareweak.visualprospectingplus.integration.model.locations.UndergroundFluidChunkLocation;
 import net.minecraft.client.gui.GuiScreen;
@@ -34,7 +34,7 @@ public class UndergroundFluidChunkRenderStep implements RenderStep {
                     (undergroundFluidChunkLocation.getMaxAmountInField() - undergroundFluidChunkLocation.getMinAmountInField() + 1);
             alpha *= alpha * 204;
             int fluidColor = undergroundFluidChunkLocation.getFluid().getColor() | (((int) alpha) << 24);
-            DrawUtils.drawGradientRect(0, 0, VP.chunkWidth, VP.chunkDepth, 0, fluidColor, fluidColor);
+            DrawUtils.drawGradientRect(0, 0, VPP.chunkWidth, VPP.chunkDepth, 0, fluidColor, fluidColor);
 
             if (undergroundFluidChunkLocation.getFluidAmount() >= undergroundFluidChunkLocation.getMaxAmountInField()) {
                 final int borderColor = 0xCCFFD700;

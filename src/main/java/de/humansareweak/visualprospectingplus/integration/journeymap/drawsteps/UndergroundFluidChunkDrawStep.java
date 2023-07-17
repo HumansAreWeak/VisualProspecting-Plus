@@ -1,7 +1,7 @@
 package de.humansareweak.visualprospectingplus.integration.journeymap.drawsteps;
 
 import de.humansareweak.visualprospectingplus.Config;
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.integration.model.locations.UndergroundFluidChunkLocation;
 import journeymap.client.render.draw.DrawStep;
 import journeymap.client.render.draw.DrawUtil;
@@ -28,7 +28,7 @@ public class UndergroundFluidChunkDrawStep implements DrawStep {
                     / (undergroundFluidChunkLocation.getMaxAmountInField() - undergroundFluidChunkLocation.getMinAmountInField() + 1);
             alpha *= alpha * 204;
             DrawUtil.drawRectangle(pixel.getX(), pixel.getY(),
-                    VP.chunkWidth * blockSize, VP.chunkDepth * blockSize,
+                    VPP.chunkWidth * blockSize, VPP.chunkDepth * blockSize,
                     undergroundFluidChunkLocation.getFluid().getColor(), (int)alpha);
 
             if(undergroundFluidChunkLocation.getFluidAmount() >= undergroundFluidChunkLocation.getMaxAmountInField()) {

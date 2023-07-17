@@ -3,7 +3,7 @@ package de.humansareweak.visualprospectingplus.integration.gregtech;
 import de.humansareweak.visualprospectingplus.Config;
 import de.humansareweak.visualprospectingplus.Utils;
 import de.humansareweak.visualprospectingplus.Utils.ChatString;
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import gregapi.block.metatype.BlockStones;
 import gregapi.tileentity.notick.TileEntityBase03MultiTileEntities;
 import net.minecraft.entity.player.EntityPlayer;
@@ -144,7 +144,7 @@ public class OreVeinWrapper {
             Utils.chatAt(aPlayer, ChatString.METEOR);// "It fell from the sky. Not related to an ore vein.");
 //			return;
         } else {
-            VP.info("Send packet to player " + aPlayer.getDisplayName() + ": (sourceType="+sourceType+", meta="+meta+")");
+            VPP.info("Send packet to player " + aPlayer.getDisplayName() + ": (sourceType="+sourceType+", meta="+meta+")");
             //Utils.NW_PJ.sendToPlayer(new PacketOreSurvey(x, y, z, meta, sourceType), (EntityPlayerMP) aPlayer);
         }
     }

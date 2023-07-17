@@ -1,7 +1,7 @@
 package de.humansareweak.visualprospectingplus.integration.model.layers;
 
 import de.humansareweak.visualprospectingplus.Utils;
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.database.ClientCache;
 import de.humansareweak.visualprospectingplus.database.UndergroundFluidPosition;
 import de.humansareweak.visualprospectingplus.integration.model.buttons.UndergroundFluidButtonManager;
@@ -51,14 +51,14 @@ public class UndergroundFluidChunkLayerManager extends LayerManager {
 
         ArrayList<UndergroundFluidChunkLocation> undergroundFluidPositions = new ArrayList<>();
 
-        for (int chunkX = minUndergroundFluidX; chunkX <= maxUndergroundFluidX; chunkX += VP.undergroundFluidSizeChunkX) {
-            for (int chunkZ = minUndergroundFluidZ; chunkZ <= maxUndergroundFluidZ; chunkZ += VP.undergroundFluidSizeChunkZ) {
+        for (int chunkX = minUndergroundFluidX; chunkX <= maxUndergroundFluidX; chunkX += VPP.undergroundFluidSizeChunkX) {
+            for (int chunkZ = minUndergroundFluidZ; chunkZ <= maxUndergroundFluidZ; chunkZ += VPP.undergroundFluidSizeChunkZ) {
                 final UndergroundFluidPosition undergroundFluid = ClientCache.instance.getUndergroundFluid(playerDimensionId, chunkX, chunkZ);
                 if (undergroundFluid.isProspected()) {
                     final int minAmountInField = undergroundFluid.getMinProduction();
                     final int maxAmountInField = undergroundFluid.getMaxProduction();
-                    for (int offsetChunkX = 0; offsetChunkX < VP.undergroundFluidSizeChunkX; offsetChunkX++) {
-                        for (int offsetChunkZ = 0; offsetChunkZ < VP.undergroundFluidSizeChunkZ; offsetChunkZ++) {
+                    for (int offsetChunkX = 0; offsetChunkX < VPP.undergroundFluidSizeChunkX; offsetChunkX++) {
+                        for (int offsetChunkZ = 0; offsetChunkZ < VPP.undergroundFluidSizeChunkZ; offsetChunkZ++) {
                             undergroundFluidPositions.add(new UndergroundFluidChunkLocation(chunkX + offsetChunkX, chunkZ + offsetChunkZ, playerDimensionId, undergroundFluid.fluid, undergroundFluid.chunks[offsetChunkX][offsetChunkZ], minAmountInField, maxAmountInField));
                         }
                     }

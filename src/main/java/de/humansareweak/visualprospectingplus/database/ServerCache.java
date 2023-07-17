@@ -1,6 +1,6 @@
 package de.humansareweak.visualprospectingplus.database;
 
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.Tags;
 import de.humansareweak.visualprospectingplus.Utils;
 import de.humansareweak.visualprospectingplus.database.veintypes.VeinType;
@@ -67,18 +67,18 @@ public class ServerCache extends WorldCache {
         final int minChunkZ = Utils.mapToCornerUndergroundFluidChunkCoord(Utils.coordBlockToChunk(blockZ - undergroundFluidBlockRadius));
 
         // Equals to ceil(undergroundFluidBlockRadius / (VP.undergroundFluidFieldSizeChunkX * VP.chunkWidth))
-        final int undergroundFluidRadius = (undergroundFluidBlockRadius + VP.undergroundFluidSizeChunkX * VP.chunkWidth - 1) / (VP.undergroundFluidSizeChunkX * VP.chunkWidth);
+        final int undergroundFluidRadius = (undergroundFluidBlockRadius + VPP.undergroundFluidSizeChunkX * VPP.chunkWidth - 1) / (VPP.undergroundFluidSizeChunkX * VPP.chunkWidth);
 
         List<UndergroundFluidPosition> foundUndergroundFluids = new ArrayList<>((2 * undergroundFluidRadius + 1) * (2 * undergroundFluidRadius + 1));
 
         for(int undergroundFluidX = 0; undergroundFluidX < 2 * undergroundFluidRadius + 1; undergroundFluidX++) {
             for (int undergroundFluidZ = 0; undergroundFluidZ < 2 * undergroundFluidRadius + 1; undergroundFluidZ++) {
-                final int chunkX = minChunkX + undergroundFluidX * VP.undergroundFluidSizeChunkX;
-                final int chunkZ = minChunkZ + undergroundFluidZ * VP.undergroundFluidSizeChunkZ;
-                final int[][] chunks = new int[VP.undergroundFluidSizeChunkX][VP.undergroundFluidSizeChunkZ];
+                final int chunkX = minChunkX + undergroundFluidX * VPP.undergroundFluidSizeChunkX;
+                final int chunkZ = minChunkZ + undergroundFluidZ * VPP.undergroundFluidSizeChunkZ;
+                final int[][] chunks = new int[VPP.undergroundFluidSizeChunkX][VPP.undergroundFluidSizeChunkZ];
                 Fluid fluid = null;
-                for (int offsetChunkX = 0; offsetChunkX < VP.undergroundFluidSizeChunkX; offsetChunkX++) {
-                    for (int offsetChunkZ = 0; offsetChunkZ < VP.undergroundFluidSizeChunkZ; offsetChunkZ++) {
+                for (int offsetChunkX = 0; offsetChunkX < VPP.undergroundFluidSizeChunkX; offsetChunkX++) {
+                    for (int offsetChunkZ = 0; offsetChunkZ < VPP.undergroundFluidSizeChunkZ; offsetChunkZ++) {
                         final FluidStack prospectedFluid = UndergroundFluidsWrapper.prospectFluid(world, chunkX + offsetChunkX, chunkZ + offsetChunkZ);
                         if (prospectedFluid != null) {
                             fluid = prospectedFluid.getFluid();

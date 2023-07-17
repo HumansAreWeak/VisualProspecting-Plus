@@ -3,11 +3,10 @@ package de.humansareweak.visualprospectingplus.database;
 import de.humansareweak.visualprospectingplus.Config;
 import de.humansareweak.visualprospectingplus.Tags;
 import de.humansareweak.visualprospectingplus.Utils;
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.hooks.ProspectingNotificationEvent;
 import de.humansareweak.visualprospectingplus.network.ProspectingRequest;
 import gregapi.oredict.OreDictItemData;
-import gregapi.oredict.OreDictMaterial;
 import gregapi.tileentity.notick.TileEntityBase03MultiTileEntities;
 import gregapi.util.OM;
 import net.minecraft.client.Minecraft;
@@ -121,7 +120,7 @@ public class ClientCache extends WorldCache {
                 final TileEntityBase03MultiTileEntities tileEntity = (TileEntityBase03MultiTileEntities) tTileEntity;
                 OreDictItemData dat = OM.data(tileEntity.getTileEntityName());
 
-                VP.info("Having received TileEntity " + tileEntity.getTileEntityName() + " with data " + dat);
+                VPP.info("Having received TileEntity " + tileEntity.getTileEntityName() + " with data " + dat);
 
                 if (dat != null && !dat.mOreDictName.startsWith("ore.small")) {
                     final int chunkX = Utils.coordBlockToChunk(blockX);
@@ -129,7 +128,7 @@ public class ClientCache extends WorldCache {
                     final OreVeinPosition oreVeinPosition = getOreVein(entityPlayer.dimension, chunkX, chunkZ);
                     final short materialId = dat.mMaterial.mMaterial.mID;
                     if(oreVeinPosition.veinType.containsOre(materialId) == false && ProspectingRequest.canSendRequest()) {
-                        VP.network.sendToServer(new ProspectingRequest(entityPlayer.dimension, blockX, blockY, blockZ, materialId));
+                        VPP.network.sendToServer(new ProspectingRequest(entityPlayer.dimension, blockX, blockY, blockZ, materialId));
                     }
                 }
             }

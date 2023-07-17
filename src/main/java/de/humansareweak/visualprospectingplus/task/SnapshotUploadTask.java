@@ -1,7 +1,7 @@
 package de.humansareweak.visualprospectingplus.task;
 
 import de.humansareweak.visualprospectingplus.Config;
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.database.ClientCache;
 import de.humansareweak.visualprospectingplus.database.OreVeinPosition;
 import de.humansareweak.visualprospectingplus.database.UndergroundFluidPosition;
@@ -39,7 +39,7 @@ public class SnapshotUploadTask implements ITask {
 
             packet.setLastMessage(listsEmpty());
 
-            VP.network.sendToServer(packet);
+            VPP.network.sendToServer(packet);
         }
         return listsEmpty();
     }

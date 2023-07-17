@@ -1,6 +1,6 @@
 package de.humansareweak.visualprospectingplus.mixins.xaerosworldmap;
 
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.integration.model.MapState;
 import de.humansareweak.visualprospectingplus.integration.model.layers.LayerManager;
 import de.humansareweak.visualprospectingplus.integration.xaeroworldmap.XaeroWorldMapState;
@@ -171,7 +171,7 @@ public abstract class GuiMapMixin extends ScreenBase {
             at = @At("TAIL")
     )
     private void injectListenKeypress(boolean mouse, int code, CallbackInfoReturnable<Boolean> cir) {
-        if (Misc.inputMatchesKeyBinding(mouse, code, VP.keyAction)) {
+        if (Misc.inputMatchesKeyBinding(mouse, code, VPP.keyAction)) {
             for (LayerRenderer layer : XaeroWorldMapState.instance.renderers) {
                 if (layer instanceof InteractableLayerRenderer) {
                     ((InteractableLayerRenderer) layer).doActionKeyPress();

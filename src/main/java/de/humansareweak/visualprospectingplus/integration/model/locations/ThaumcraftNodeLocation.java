@@ -1,7 +1,7 @@
 package de.humansareweak.visualprospectingplus.integration.model.locations;
 
 import com.dyonovan.tcnodetracker.lib.NodeList;
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.integration.model.waypoints.Waypoint;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.EnumChatFormatting;
@@ -14,7 +14,7 @@ import thaumcraft.common.tiles.TileNode;
 
 public class ThaumcraftNodeLocation implements IWaypointAndLocationProvider {
 
-    private static final String deleteHint = EnumChatFormatting.DARK_GRAY + I18n.format("visualprospecting.node.deletehint", Keyboard.getKeyName(VP.keyAction.getKeyCode()));;
+    private static final String deleteHint = EnumChatFormatting.DARK_GRAY + I18n.format("visualprospecting.node.deletehint", Keyboard.getKeyName(VPP.keyAction.getKeyCode()));;
     private static final String activeWaypointHint = EnumChatFormatting.GOLD + I18n.format("visualprospecting.iswaypoint");
     private static final String title = EnumChatFormatting.BOLD + I18n.format("tile.blockAiry.0.name");
 

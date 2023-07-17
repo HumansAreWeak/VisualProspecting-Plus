@@ -1,7 +1,7 @@
 package de.humansareweak.visualprospectingplus.task;
 
 import de.humansareweak.visualprospectingplus.Config;
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.database.OreVeinPosition;
 import de.humansareweak.visualprospectingplus.database.TransferCache;
 import de.humansareweak.visualprospectingplus.database.UndergroundFluidPosition;
@@ -45,7 +45,7 @@ public class SnapshotDownloadTask implements ITask {
 
             packet.setLastMessage(listsEmpty());
 
-            VP.network.sendTo(packet, player);
+            VPP.network.sendTo(packet, player);
 
             if(listsEmpty()) {
                 final IChatComponent notification = new ChatComponentTranslation("item.visualprospecting.prospectorslog.reading.end", player.getDisplayName());

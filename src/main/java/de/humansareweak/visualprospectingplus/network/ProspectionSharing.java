@@ -1,7 +1,6 @@
 package de.humansareweak.visualprospectingplus.network;
 
-import de.humansareweak.visualprospectingplus.Config;
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.database.ClientCache;
 import de.humansareweak.visualprospectingplus.database.OreVeinPosition;
 import de.humansareweak.visualprospectingplus.database.TransferCache;
@@ -36,7 +35,7 @@ public class ProspectionSharing implements IMessage {
     }
 
     public int putOreVeins(List<OreVeinPosition> oreVeins) {
-        final int availableBytes = VP.uploadSizePerPacketInBytes - bytesUsed;
+        final int availableBytes = VPP.uploadSizePerPacketInBytes - bytesUsed;
         final int maxAddedOreVeins = availableBytes / OreVeinPosition.getMaxBytes();
         final int addedOreVeins = Math.min(oreVeins.size(), maxAddedOreVeins);
         this.oreVeins.addAll(oreVeins.subList(0, addedOreVeins));
@@ -45,7 +44,7 @@ public class ProspectionSharing implements IMessage {
     }
 
     public int putOreUndergroundFluids(List<UndergroundFluidPosition> undergroundFluids) {
-        final int availableBytes = VP.uploadSizePerPacketInBytes - bytesUsed;
+        final int availableBytes = VPP.uploadSizePerPacketInBytes - bytesUsed;
         final int maxAddedUndergroundFluids = availableBytes / UndergroundFluidPosition.BYTES;
         final int addedUndergroundFluids = Math.min(undergroundFluids.size(), maxAddedUndergroundFluids);
         this.undergroundFluids.addAll(undergroundFluids.subList(0, addedUndergroundFluids));
@@ -88,9 +87,9 @@ public class ProspectionSharing implements IMessage {
             final int chunkX = buf.readInt();
             final int chunkZ = buf.readInt();
             final Fluid fluid = FluidRegistry.getFluid(buf.readInt());
-            final int[][] chunks = new int[VP.undergroundFluidSizeChunkX][VP.undergroundFluidSizeChunkZ];
-            for(int offsetChunkX = 0; offsetChunkX < VP.undergroundFluidSizeChunkX; offsetChunkX++)
-                for(int offsetChunkZ = 0; offsetChunkZ< VP.undergroundFluidSizeChunkZ; offsetChunkZ++) {
+            final int[][] chunks = new int[VPP.undergroundFluidSizeChunkX][VPP.undergroundFluidSizeChunkZ];
+            for(int offsetChunkX = 0; offsetChunkX < VPP.undergroundFluidSizeChunkX; offsetChunkX++)
+                for(int offsetChunkZ = 0; offsetChunkZ< VPP.undergroundFluidSizeChunkZ; offsetChunkZ++) {
                     chunks[offsetChunkX][offsetChunkZ] = buf.readInt();
                 }
             undergroundFluids.add(new UndergroundFluidPosition(dimensionId, chunkX, chunkZ, fluid, chunks));
@@ -117,8 +116,8 @@ public class ProspectionSharing implements IMessage {
             buf.writeInt(undergroundFluid.chunkX);
             buf.writeInt(undergroundFluid.chunkZ);
             buf.writeInt(undergroundFluid.fluid.getID());
-            for(int offsetChunkX = 0; offsetChunkX < VP.undergroundFluidSizeChunkX; offsetChunkX++) {
-                for (int offsetChunkZ = 0; offsetChunkZ < VP.undergroundFluidSizeChunkZ; offsetChunkZ++) {
+            for(int offsetChunkX = 0; offsetChunkX < VPP.undergroundFluidSizeChunkX; offsetChunkX++) {
+                for (int offsetChunkZ = 0; offsetChunkZ < VPP.undergroundFluidSizeChunkZ; offsetChunkZ++) {
                     buf.writeInt(undergroundFluid.chunks[offsetChunkX][offsetChunkZ]);
                 }
             }
@@ -135,7 +134,7 @@ public class ProspectionSharing implements IMessage {
             final EntityPlayerMP player = ctx.getServerHandler().playerEntity;
 
             // Optional todo: Integrate over time for proper checking
-            if(message.getBytes() > VP.uploadSizePerPacketInBytes) {
+            if(message.getBytes() > VPP.uploadSizePerPacketInBytes) {
                 player.playerNetServerHandler.kickPlayerFromServer("Do not spam the server! Change your VisualProcessing configuration back to the servers!");
             }
             if(message.isFirstMessage) {

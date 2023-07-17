@@ -1,6 +1,6 @@
 package de.humansareweak.visualprospectingplus.database.cachebuilder;
 
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.database.ServerCache;
 import io.xol.enklume.MinecraftWorld;
 
@@ -18,7 +18,7 @@ public class WorldAnalysis {
     }
 
     public void cacheVeins() throws IOException, DataFormatException {
-        VP.info("Starting to parse world save to cache GT vein locations. This might take some time...");
+        VPP.info("Starting to parse world save to cache GT vein locations. This might take some time...");
         ServerCache.instance.reset();
         final List<Integer> dimensionIds = world.getDimensionIds();
         AnalysisProgressTracker.setNumberOfDimensions(dimensionIds.size());
@@ -28,7 +28,7 @@ public class WorldAnalysis {
             AnalysisProgressTracker.dimensionProcessed();
         }
         AnalysisProgressTracker.processingFinished();
-        VP.info("Saving ore vein cache...");
+        VPP.info("Saving ore vein cache...");
         ServerCache.instance.saveVeinCache();
     }
 }

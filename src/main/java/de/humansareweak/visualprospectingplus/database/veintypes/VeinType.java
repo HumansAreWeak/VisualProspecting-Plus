@@ -2,53 +2,43 @@ package de.humansareweak.visualprospectingplus.database.veintypes;
 
 import de.humansareweak.visualprospectingplus.Tags;
 import gregapi.data.MT;
+import gregapi.worldgen.StoneLayer;
+import gregapi.worldgen.StoneLayerOres;
 import net.minecraft.util.EnumChatFormatting;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class VeinType {
-
+    private final StoneLayer stoneLayer;
     public static final int veinHeight = 9;
 
     public final String name;
     public short veinId;
-    public final IOreMaterialProvider oreMaterialProvider;
-    public final int blockSize;
-    public final short primaryOreMeta;
-    public final short secondaryOreMeta;
-    public final short inBetweenOreMeta;
-    public final short sporadicOreMeta;
-    public final int minBlockY;
-    public final int maxBlockY;
-    public final Set<Short> oresAsSet;
+    private final Set<StoneLayerOres> ores;
     private boolean isHighlighted = true;
 
     // Available after VisualProspecting post GT initialization
-    public static final VeinType NO_VEIN = new VeinType(Tags.ORE_MIX_NONE_NAME, null, 0, (short)-1, (short)-1, (short)-1, (short)-1, 0, 0);
+    public static final VeinType NO_VEIN = new VeinType(Tags.ORE_MIX_NONE_NAME, null);
 
-    public VeinType(String name, IOreMaterialProvider oreMaterialProvider, int blockSize, short primaryOreMeta, short secondaryOreMeta, short inBetweenOreMeta, short sporadicOreMeta, int minBlockY, int maxBlockY)
+    public VeinType(String name, StoneLayer stoneLayer)
     {
         this.name = name;
-        this.oreMaterialProvider = oreMaterialProvider;
-        this.blockSize = blockSize;
-        this.primaryOreMeta = primaryOreMeta;
-        this.secondaryOreMeta = secondaryOreMeta;
-        this.inBetweenOreMeta = inBetweenOreMeta;
-        this.sporadicOreMeta = sporadicOreMeta;
-        this.minBlockY = minBlockY;
-        this.maxBlockY = maxBlockY;
-        oresAsSet = new HashSet<>();
-        oresAsSet.add(primaryOreMeta);
-        oresAsSet.add(secondaryOreMeta);
-        oresAsSet.add(inBetweenOreMeta);
-        oresAsSet.add(sporadicOreMeta);
+        this.stoneLayer = stoneLayer;
+        ores = new HashSet<>();
+
+        if(stoneLayer != null) ores.addAll(stoneLayer.mOres);
     }
 
-    public boolean matches(Set<Short> foundOres) {
-        return foundOres.containsAll(oresAsSet);
+    public Set<StoneLayerOres> getOres() {
+        return ores;
+    }
+
+    public boolean matches(Set<StoneLayerOres> foundOres) {
+        return foundOres.containsAll(ores);
     }
 
     public boolean matchesWithSpecificPrimaryOrSecondary(Set<Short> foundOres, short specificMeta) {
@@ -72,10 +62,7 @@ public class VeinType {
     }
 
     public List<String> getOreMaterialNames() {
-        return MT.ALL_MATERIALS_REGISTERED_HERE.stream()
-                .filter(e -> oresAsSet.contains(e.mID))
-                .map(e -> EnumChatFormatting.GRAY + e.getLocal())
-                .collect(Collectors.toList());
+        return ores.stream().map(e -> e.mMaterial.getLocal()).collect(Collectors.toList());
     }
 
     public Set<Short> getOresAtLayer(int layerBlockY) {

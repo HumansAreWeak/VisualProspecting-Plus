@@ -1,7 +1,7 @@
 package de.humansareweak.visualprospectingplus.database.cachebuilder;
 
 import de.humansareweak.visualprospectingplus.Config;
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.Utils;
 import de.humansareweak.visualprospectingplus.database.ServerCache;
 import de.humansareweak.visualprospectingplus.database.veintypes.VeinType;
@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.DataFormatException;
 
@@ -40,6 +39,8 @@ public class DimensionAnalysis {
             AnalysisProgressTracker.setNumberOfRegionFiles(regionFiles.size());
 
             final Map<Long, DetailedChunkAnalysis> chunksForSecondIdentificationPass = new ConcurrentHashMap<>();
+
+            VPP.info("Region Files: " + regionFiles);
 
             regionFiles.parallelStream().forEach(regionFile -> {
                 executeForEachGeneratedOreChunk(regionFile, (root, chunkX, chunkZ) -> {
@@ -93,15 +94,15 @@ public class DimensionAnalysis {
     private void executeForEachGeneratedOreChunk(File regionFile, IChunkHandler chunkHandler) {
         try {
             if ( !Pattern.matches("^r\\.-?\\d+\\.-?\\d+\\.mca$", regionFile.getName())) {
-                VP.warn("Invalid region file found! " + regionFile.getCanonicalPath() + " continuing");
+                VPP.warn("Invalid region file found! " + regionFile.getCanonicalPath() + " continuing");
                 return;
             }
             final String[] parts = regionFile.getName().split("\\.");
             final int regionChunkX = Integer.parseInt(parts[1]) << 5;
             final int regionChunkZ = Integer.parseInt(parts[2]) << 5;
             final MinecraftRegion region = new MinecraftRegion(regionFile);
-            for (int localChunkX = 0; localChunkX < VP.chunksPerRegionFileX; localChunkX++) {
-                for (int localChunkZ = 0; localChunkZ < VP.chunksPerRegionFileZ; localChunkZ++) {
+            for (int localChunkX = 0; localChunkX < VPP.chunksPerRegionFileX; localChunkX++) {
+                for (int localChunkZ = 0; localChunkZ < VPP.chunksPerRegionFileZ; localChunkZ++) {
                     final int chunkX = regionChunkX + localChunkX;
                     final int chunkZ = regionChunkZ + localChunkZ;
 

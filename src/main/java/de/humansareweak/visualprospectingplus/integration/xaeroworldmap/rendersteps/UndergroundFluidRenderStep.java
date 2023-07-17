@@ -1,6 +1,6 @@
 package de.humansareweak.visualprospectingplus.integration.xaeroworldmap.rendersteps;
 
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.integration.DrawUtils;
 import de.humansareweak.visualprospectingplus.integration.model.locations.UndergroundFluidLocation;
 import net.minecraft.client.gui.GuiScreen;
@@ -25,8 +25,8 @@ public class UndergroundFluidRenderStep implements RenderStep {
             GL11.glTranslated(undergroundFluidLocation.getBlockX() - 0.5 - cameraX, undergroundFluidLocation.getBlockZ() - 0.5 - cameraZ, 0);
 
             final int borderColor = undergroundFluidLocation.getFluid().getColor() | 0xCC000000;
-            final double lenX = VP.undergroundFluidSizeChunkX * VP.chunkWidth;
-            final double lenZ = VP.undergroundFluidSizeChunkZ * VP.chunkDepth;
+            final double lenX = VPP.undergroundFluidSizeChunkX * VPP.chunkWidth;
+            final double lenZ = VPP.undergroundFluidSizeChunkZ * VPP.chunkDepth;
             DrawUtils.drawGradientRect(0, 0, lenX, 2, 0, borderColor, borderColor);
             DrawUtils.drawGradientRect(lenX, 0, lenX + 2, lenZ, 0, borderColor, borderColor);
             DrawUtils.drawGradientRect(2, lenZ, lenX + 2, lenZ + 2, 0, borderColor, borderColor);
@@ -36,7 +36,7 @@ public class UndergroundFluidRenderStep implements RenderStep {
             if (scale >= 1 && gui != null) {
                 GL11.glScaled(1 / scale, 1 / scale, 1);
                 final String label = undergroundFluidLocation.getMinProduction() + "L - " + maxAmountInField + "L  " + undergroundFluidLocation.getFluid().getLocalizedName();
-                DrawUtils.drawSimpleLabel(gui, label, VP.chunkWidth * scale, 0, 0xFFFFFFFF, 0xB4000000, false);
+                DrawUtils.drawSimpleLabel(gui, label, VPP.chunkWidth * scale, 0, 0xFFFFFFFF, 0xB4000000, false);
             }
 
             GL11.glPopMatrix();

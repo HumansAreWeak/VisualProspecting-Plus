@@ -2,7 +2,7 @@ package de.humansareweak.visualprospectingplus.database.cachebuilder;
 
 import de.humansareweak.visualprospectingplus.Config;
 import de.humansareweak.visualprospectingplus.Utils;
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import net.minecraft.server.MinecraftServer;
 
 import java.io.File;
@@ -31,7 +31,7 @@ public class AnalysisProgressTracker {
 
     public static synchronized void announceFastDimension(int dimensionId) {
         final String message = "Processing dimension with id " + dimensionId + " with fast scanning.";
-        VP.info(message);
+        VPP.info(message);
         if(Utils.isLogicalClient()) {
             MinecraftServer.getServer().userMessage = message;
         }
@@ -39,7 +39,7 @@ public class AnalysisProgressTracker {
 
     public static synchronized void announceSlowDimension(int dimensionId) {
         final String message = "Processing dimension with id " + dimensionId + " with slow (safe) scanning.";
-        VP.info(message);
+        VPP.info(message);
         if(Utils.isLogicalClient()) {
             MinecraftServer.getServer().userMessage = message;
         }
@@ -63,7 +63,7 @@ public class AnalysisProgressTracker {
             final String message = "Caching GT ore generation meta data - Dimension ("
                     + (dimensionsProcessed + 1) + "/" + numberOfDimensions + ")  "
                     + (numberOfRegionFiles == 0 ? 0 : ((regionFilesProcessed * 100) / numberOfRegionFiles)) + "%";
-            VP.info(message);
+            VPP.info(message);
             if(Utils.isLogicalClient()) {
                 MinecraftServer.getServer().userMessage = message + "%";  // Escape % for String.format
             }
@@ -77,7 +77,7 @@ public class AnalysisProgressTracker {
         format.setMinimumFractionDigits(1);
         format.setMaximumFractionDigits(1);
         final String message = "Parsing complete! Thank you for your patience.  - Duration: " + format.format(elapsedTimeMS / 1000) + "sec";
-        VP.info(message);
+        VPP.info(message);
         if(Utils.isLogicalClient()) {
             MinecraftServer.getServer().userMessage = message;
         }
@@ -85,7 +85,7 @@ public class AnalysisProgressTracker {
 
     public static synchronized void notifyCorruptFile(File regionFile) {
         final String message = "Encountered corrupt/malformed/modified save file: " + regionFile;
-        VP.info(message);
+        VPP.info(message);
         if(Utils.isLogicalClient()) {
             MinecraftServer.getServer().userMessage = message;
         }

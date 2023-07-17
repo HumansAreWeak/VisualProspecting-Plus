@@ -1,6 +1,6 @@
 package de.humansareweak.visualprospectingplus.hooks;
 
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.Utils;
 import de.humansareweak.visualprospectingplus.database.ClientCache;
 import de.humansareweak.visualprospectingplus.database.ServerCache;
@@ -30,7 +30,7 @@ public class HooksEventBus {
     public void onEvent(EntityJoinWorldEvent event) {
         if(event.world.isRemote == false) {
             if (event.entity instanceof EntityPlayerMP) {
-                VP.network.sendTo(new WorldIdNotification(WorldIdHandler.getWorldId()), (EntityPlayerMP) event.entity);
+                VPP.network.sendTo(new WorldIdNotification(WorldIdHandler.getWorldId()), (EntityPlayerMP) event.entity);
             }
             else if (event.entity instanceof EntityPlayer) {
                 ClientCache.instance.loadVeinCache(WorldIdHandler.getWorldId());

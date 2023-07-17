@@ -1,6 +1,6 @@
 package de.humansareweak.visualprospectingplus.mixins.minecraft;
 
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.Tags;
 import de.humansareweak.visualprospectingplus.Utils;
 import de.humansareweak.visualprospectingplus.database.ClientCache;
@@ -39,13 +39,13 @@ public class ItemEditableBookMixin {
                 final int blockZ = compound.getInteger(Tags.PROSPECTION_BLOCK_Z);
                 final int blockRadius = compound.getInteger(Tags.PROSPECTION_ORE_RADIUS);
                 final List<OreVeinPosition> foundOreVeins = ServerCache.instance.prospectOreBlockRadius(dimensionId, blockX, blockZ, blockRadius);
-                final List<UndergroundFluidPosition> foundUndergroundFluids = ServerCache.instance.prospectUndergroundFluidBlockRadius(world, blockX, blockZ, VP.undergroundFluidChunkProspectingBlockRadius);
+                final List<UndergroundFluidPosition> foundUndergroundFluids = ServerCache.instance.prospectUndergroundFluidBlockRadius(world, blockX, blockZ, VPP.undergroundFluidChunkProspectingBlockRadius);
                 if(Utils.isLogicalClient()) {
                     ClientCache.instance.putOreVeins(foundOreVeins);
                     ClientCache.instance.putUndergroundFluids(foundUndergroundFluids);
                 }
                 else {
-                    VP.network.sendTo(new ProspectingNotification(foundOreVeins, foundUndergroundFluids), (EntityPlayerMP) entityPlayer);
+                    VPP.network.sendTo(new ProspectingNotification(foundOreVeins, foundUndergroundFluids), (EntityPlayerMP) entityPlayer);
                 }
             }
         }

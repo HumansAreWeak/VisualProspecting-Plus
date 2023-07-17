@@ -1,6 +1,6 @@
 package de.humansareweak.visualprospectingplus.integration.journeymap.drawsteps;
 
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.integration.model.locations.UndergroundFluidLocation;
 import journeymap.client.render.draw.DrawStep;
 import journeymap.client.render.draw.DrawUtil;
@@ -26,13 +26,13 @@ public class UndergroundFluidDrawStep implements DrawStep {
 
             final int borderColor = undergroundFluidLocation.getFluid().getColor();
             final int borderAlpha = 204;
-            DrawUtil.drawRectangle(pixel.getX(), pixel.getY(), VP.undergroundFluidSizeChunkX * VP.chunkWidth * blockSize, 2 * blockSize, borderColor, borderAlpha);
-            DrawUtil.drawRectangle(pixel.getX() + VP.undergroundFluidSizeChunkX * VP.chunkWidth * blockSize, pixel.getY(), 2 * blockSize, VP.undergroundFluidSizeChunkZ * VP.chunkDepth * blockSize, borderColor, borderAlpha);
-            DrawUtil.drawRectangle(pixel.getX() + 2 * blockSize, pixel.getY() + VP.undergroundFluidSizeChunkZ * VP.chunkDepth * blockSize, VP.undergroundFluidSizeChunkX * VP.chunkWidth * blockSize, 2 * blockSize, borderColor, borderAlpha);
-            DrawUtil.drawRectangle(pixel.getX(), pixel.getY() + 2 * blockSize, 2 * blockSize, VP.undergroundFluidSizeChunkZ * VP.chunkDepth * blockSize, borderColor, borderAlpha);
+            DrawUtil.drawRectangle(pixel.getX(), pixel.getY(), VPP.undergroundFluidSizeChunkX * VPP.chunkWidth * blockSize, 2 * blockSize, borderColor, borderAlpha);
+            DrawUtil.drawRectangle(pixel.getX() + VPP.undergroundFluidSizeChunkX * VPP.chunkWidth * blockSize, pixel.getY(), 2 * blockSize, VPP.undergroundFluidSizeChunkZ * VPP.chunkDepth * blockSize, borderColor, borderAlpha);
+            DrawUtil.drawRectangle(pixel.getX() + 2 * blockSize, pixel.getY() + VPP.undergroundFluidSizeChunkZ * VPP.chunkDepth * blockSize, VPP.undergroundFluidSizeChunkX * VPP.chunkWidth * blockSize, 2 * blockSize, borderColor, borderAlpha);
+            DrawUtil.drawRectangle(pixel.getX(), pixel.getY() + 2 * blockSize, 2 * blockSize, VPP.undergroundFluidSizeChunkZ * VPP.chunkDepth * blockSize, borderColor, borderAlpha);
 
             final String label = undergroundFluidLocation.getMinProduction() + "L - " + maxAmountInField + "L  " + undergroundFluidLocation.getFluid().getLocalizedName();
-            DrawUtil.drawLabel(label, pixel.getX() + VP.chunkWidth * blockSize, pixel.getY(), DrawUtil.HAlign.Right, DrawUtil.VAlign.Below, 0, 180, 0x00FFFFFF, 255, fontScale, false, rotation);
+            DrawUtil.drawLabel(label, pixel.getX() + VPP.chunkWidth * blockSize, pixel.getY(), DrawUtil.HAlign.Right, DrawUtil.VAlign.Below, 0, 180, 0x00FFFFFF, 255, fontScale, false, rotation);
         }
     }
 }

@@ -1,6 +1,6 @@
 package de.humansareweak.visualprospectingplus.database;
 
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.Utils;
 import de.humansareweak.visualprospectingplus.database.veintypes.VeinType;
 import de.humansareweak.visualprospectingplus.database.veintypes.VeinTypeCaching;
@@ -50,13 +50,13 @@ public class DimensionCache {
 
     public ByteBuffer saveUndergroundFluids() {
         if(changedOrNewUndergroundFluids.isEmpty() == false) {
-            final ByteBuffer byteBuffer = ByteBuffer.allocate(changedOrNewUndergroundFluids.size() * (Long.BYTES + Integer.BYTES * (1 + VP.undergroundFluidSizeChunkX * VP.undergroundFluidSizeChunkZ)));
+            final ByteBuffer byteBuffer = ByteBuffer.allocate(changedOrNewUndergroundFluids.size() * (Long.BYTES + Integer.BYTES * (1 + VPP.undergroundFluidSizeChunkX * VPP.undergroundFluidSizeChunkZ)));
             changedOrNewUndergroundFluids.stream().map(undergroundFluids::get).forEach(undergroundFluidPosition -> {
                 byteBuffer.putInt(undergroundFluidPosition.chunkX);
                 byteBuffer.putInt(undergroundFluidPosition.chunkZ);
                 byteBuffer.putInt(undergroundFluidPosition.fluid.getID());
-                for(int offsetChunkX = 0; offsetChunkX < VP.undergroundFluidSizeChunkX; offsetChunkX++) {
-                    for (int offsetChunkZ = 0; offsetChunkZ < VP.undergroundFluidSizeChunkZ; offsetChunkZ++) {
+                for(int offsetChunkX = 0; offsetChunkX < VPP.undergroundFluidSizeChunkX; offsetChunkX++) {
+                    for (int offsetChunkZ = 0; offsetChunkZ < VPP.undergroundFluidSizeChunkZ; offsetChunkZ++) {
                         byteBuffer.putInt(undergroundFluidPosition.chunks[offsetChunkX][offsetChunkZ]);
                     }
                 }
@@ -80,13 +80,13 @@ public class DimensionCache {
             }
         }
         if(undergroundFluidsBuffer != null) {
-            while (undergroundFluidsBuffer.remaining() >= Integer.BYTES * (3 + VP.undergroundFluidSizeChunkX * VP.undergroundFluidSizeChunkZ)) {
+            while (undergroundFluidsBuffer.remaining() >= Integer.BYTES * (3 + VPP.undergroundFluidSizeChunkX * VPP.undergroundFluidSizeChunkZ)) {
                 final int chunkX = undergroundFluidsBuffer.getInt();
                 final int chunkZ = undergroundFluidsBuffer.getInt();
                 final Fluid fluid = FluidRegistry.getFluid(undergroundFluidsBuffer.getInt());
-                final int[][] chunks = new int[VP.undergroundFluidSizeChunkX][VP.undergroundFluidSizeChunkZ];
-                for(int offsetChunkX = 0; offsetChunkX < VP.undergroundFluidSizeChunkX; offsetChunkX++) {
-                    for (int offsetChunkZ = 0; offsetChunkZ < VP.undergroundFluidSizeChunkZ; offsetChunkZ++) {
+                final int[][] chunks = new int[VPP.undergroundFluidSizeChunkX][VPP.undergroundFluidSizeChunkZ];
+                for(int offsetChunkX = 0; offsetChunkX < VPP.undergroundFluidSizeChunkX; offsetChunkX++) {
+                    for (int offsetChunkZ = 0; offsetChunkZ < VPP.undergroundFluidSizeChunkZ; offsetChunkZ++) {
                         chunks[offsetChunkX][offsetChunkZ] = undergroundFluidsBuffer.getInt();
                     }
                 }

@@ -1,7 +1,7 @@
 package de.humansareweak.visualprospectingplus.item;
 
 import de.humansareweak.visualprospectingplus.Tags;
-import de.humansareweak.visualprospectingplus.VP;
+import de.humansareweak.visualprospectingplus.VPP;
 import de.humansareweak.visualprospectingplus.database.TransferCache;
 import de.humansareweak.visualprospectingplus.task.SnapshotDownloadTask;
 import de.humansareweak.visualprospectingplus.task.SnapshotUploadTask;
@@ -42,7 +42,7 @@ public class ProspectorsLog extends Item {
                 TaskManager.instance.addTask(new SnapshotUploadTask());
             }
             else {
-                final int random = VP.randomGeneration.nextInt(1000);
+                final int random = VPP.randomGeneration.nextInt(1000);
                 if(random < 5) {
                     final String localizationKey = "item.visualprospecting.prospectorslog.creation.fail" + random;
                     final IChatComponent notification = new ChatComponentTranslation(localizationKey);
@@ -63,7 +63,7 @@ public class ProspectorsLog extends Item {
             final NBTTagCompound compound = item.getTagCompound();
             final String authorUuid = compound.getString(Tags.PROSPECTORSLOG_AUTHOR_ID);
             if(authorUuid.equals(player.getPersistentID().toString()) == false) {
-                final int random = VP.randomGeneration.nextInt(TransferCache.instance.isClientDataAvailable(authorUuid) ? 1000 : 5);
+                final int random = VPP.randomGeneration.nextInt(TransferCache.instance.isClientDataAvailable(authorUuid) ? 1000 : 5);
                 if(random < 5) {
                     final String localizationKey = "item.visualprospecting.prospectorslog.reading.fail" + random;
                     final IChatComponent notification = new ChatComponentTranslation(localizationKey);
